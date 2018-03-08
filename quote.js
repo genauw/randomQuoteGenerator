@@ -1,3 +1,4 @@
+/*
 var quotes = [
   {"quote": "To burn, a fire needed fuel",
 "author": "Steven Erikson"},
@@ -8,22 +9,26 @@ var quotes = [
 {"quote": "Do the best you can, with what you have, where you are",
 "author": "Theodore Roosevelt"}
 ];
+*/
 
 $(document).ready(function(){
   $("#changeQuote").click (function(){
-    $(".quote").html("Button Clicked");
+    
+    var combined = "";
+    
+    //$(".quote").html("Button Clicked");
     //console.log(quotes[1]);
     console.log("Click worked");
 
-    
+    //local JSON call
     $.ajax({
       type: 'GET',
       url: 'quotes.json',
       dataType: 'json',
       mimeType: "application/json",
-      success: function(val){
-        console.log(val);
-        $('.quote').html(JSON.stringify(val));
+      success: function(json){
+        console.log(json);
+        $('.quote').html(JSON.stringify(json));
       },
       cache: false 
     });
@@ -36,18 +41,27 @@ $(document).ready(function(){
       type: 'GET',
       url: quoteURL,
       dataType: 'json',
-      success: function(val){
-        console.log(val);
-        $('.quote').html(JSON.stringify(val));
+      success: function(json){
+        //console.log(json);
+        //$('.quote').html(JSON.stringify(json));
+        json.map(function(val){
+          var keys = Object.keys(val);                              
+          var quote = "\"" + $(val.content).text() + "\"";
+          var author = val.title;
+          combined = quote + '<br>' + " - " + author;
+          $('.quote').html(combined);
+        });
+        var tweetLink = "https://twitter.com/intent/tweet?" + "text=" + combined.replace("<br>","") + "&via=genauw&hashtags=quotes,freecodecamp";
+        $("#tweet").attr("href",tweetLink);
       },
       cache: false
     });
     */        
     /*
     var quoteURL = "https://thesimpsonsquoteapi.glitch.me/quotes";
-    $.getJSON(quoteURL, function(val){
-      console.log(val);
-      $('.quote').html(JSON.stringify(val));
+    $.getJSON(quoteURL, function(json){
+      console.log(json);
+      $('.quote').html(JSON.stringify(json));
     });
     */    
   });
