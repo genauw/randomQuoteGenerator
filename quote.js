@@ -13,20 +13,32 @@ var quotes = [
 
 $(document).ready(function(){
   $("#localQuote").click (function(){    
-    var combined = "";    
+     
     //$(".quote").html("Button Clicked");
     //console.log(quotes[1]);
     //console.log("Click worked");
 
-    //local JSON call
     $.ajax({
       type: 'GET',
       url: 'quotes.json',
       dataType: 'json',
       mimeType: "application/json",
       success: function(json){
-        console.log(json);
-        $('.quote').html(JSON.stringify(json));
+        var count = Object.keys(json).length;
+        var randomInt = Math.floor(Math.random() * count);
+        console.log(randomInt);
+        console.log(json[randomInt]); 
+        /*
+        json.map(function(val){
+          var keys = Object.keys(val);
+          var quote = val.quote;
+          var author = val.author;
+          $(".quote").html("\"" + val.quote + "\"" + "<br>" + "- " + val.author);
+        });
+        */
+
+        //console.log(json);
+        //$('.quote').html(JSON.stringify(json));
       },
       cache: false 
     });      
@@ -34,6 +46,7 @@ $(document).ready(function(){
 
   $("#randomQuote").click(function(){
     var quoteURL = "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";    
+    var combined = "";   
     $.ajax({
       type: 'GET',
       url: quoteURL,
