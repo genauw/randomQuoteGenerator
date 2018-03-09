@@ -12,13 +12,11 @@ var quotes = [
 */
 
 $(document).ready(function(){
-  $("#changeQuote").click (function(){
-    
-    var combined = "";
-    
+  $("#localQuote").click (function(){    
+    var combined = "";    
     //$(".quote").html("Button Clicked");
     //console.log(quotes[1]);
-    console.log("Click worked");
+    //console.log("Click worked");
 
     //local JSON call
     $.ajax({
@@ -31,11 +29,10 @@ $(document).ready(function(){
         $('.quote').html(JSON.stringify(json));
       },
       cache: false 
-    });
-    
-    
+    });      
+  });
 
-    /*
+  $("#randomQuote").click(function(){
     var quoteURL = "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";    
     $.ajax({
       type: 'GET',
@@ -55,14 +52,13 @@ $(document).ready(function(){
         $("#tweet").attr("href",tweetLink);
       },
       cache: false
-    });
-    */        
-    /*
+    });  
+  });
+  $("#simpsonsQuote").click(function(){
     var quoteURL = "https://thesimpsonsquoteapi.glitch.me/quotes";
     $.getJSON(quoteURL, function(json){
       console.log(json);
       $('.quote').html(JSON.stringify(json));
     });
-    */    
   });
 }); 
