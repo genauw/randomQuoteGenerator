@@ -1,23 +1,6 @@
-/*
-var quotes = [
-  {"quote": "To burn, a fire needed fuel",
-"author": "Steven Erikson"},
-{"quote": "Don't let anyone ever make you feel like you don't deserve what you want",
-"author": "Heath Ledger"},
-{"quote": "Without pain, without sacrifice, we would have nothing",
-"author": "Tyler Durden"},
-{"quote": "Do the best you can, with what you have, where you are",
-"author": "Theodore Roosevelt"}
-];
-*/
-
 $(document).ready(function(){
-  $("#localQuote").click (function(){    
-     
-    //$(".quote").html("Button Clicked");
-    //console.log(quotes[1]);
-    //console.log("Click worked");
-
+  $("#localQuote").click (function(){         
+    var combined = "";
     $.ajax({
       type: 'GET',
       url: 'quotes.json',
@@ -26,19 +9,14 @@ $(document).ready(function(){
       success: function(json){
         var count = Object.keys(json).length;
         var randomInt = Math.floor(Math.random() * count);
-        console.log(randomInt);
-        console.log(json[randomInt]); 
-        /*
-        json.map(function(val){
-          var keys = Object.keys(val);
-          var quote = val.quote;
-          var author = val.author;
-          $(".quote").html("\"" + val.quote + "\"" + "<br>" + "- " + val.author);
-        });
-        */
-
-        //console.log(json);
-        //$('.quote').html(JSON.stringify(json));
+        
+        var quote = "\"" + json[randomInt].quote + "\"";
+        var author = json[randomInt].author;
+        combined = quote + '<br>' + ' - ' + author;
+        $(".quote").html(combined);
+        
+        var tweetLink = "https://twitter.com/intent/tweet?" + "text=" + combined.replace("<br>", "") + "&via=genauw&hashtags=quotes,freecodecamp";
+        $("#tweet").attr("href", tweetLink);
       },
       cache: false 
     });      
@@ -55,7 +33,7 @@ $(document).ready(function(){
         //console.log(json);
         //$('.quote').html(JSON.stringify(json));
         json.map(function(val){
-          var keys = Object.keys(val);                              
+          //var keys = Object.keys(val);                              
           var quote = "\"" + $(val.content).text() + "\"";
           var author = val.title;
           combined = quote + '<br>' + " - " + author;
@@ -67,11 +45,23 @@ $(document).ready(function(){
       cache: false
     });  
   });
+
   $("#simpsonsQuote").click(function(){
     var quoteURL = "https://thesimpsonsquoteapi.glitch.me/quotes";
+    var combined = "";
     $.getJSON(quoteURL, function(json){
-      console.log(json);
-      $('.quote').html(JSON.stringify(json));
+      //console.log(json);
+      //$('.quote').html(JSON.stringify(json));
+      //console.log(json.quote);
+      json.map(function(val){
+        //var keys = Object.keys(val);
+        var quote = "\"" + val.quote + "\"";
+        var author = val.character;
+        combined = quote + "<br>" + " - " + author;
+        $(".quote").html(combined);
+      });
+      var tweetLink = "https://twitter.com/intent/tweet?" + "text=" + combined.replace("<br>", "") + "&via=genauw&hashtags=quotes,freecodecamp" ;
+      $("#tweet").attr("href", tweetLink);
     });
   });
 }); 
