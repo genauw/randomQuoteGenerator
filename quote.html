@@ -8,40 +8,40 @@
     <title>Random Quotes</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style type="text/css">.btn, .quote {margin-top: 24px;}</style>
+    <style type="text/css"> .container{padding: 48px; justify-content: center;}</style>
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="max-width: 600px;">
       <div class="row text-center">
         <h1>Random Quote Generator</h1>
       </div>
-      <div class="row text-center">
+      <div class="row text-center" style="padding-top:24px;">
         <div class="col-xs-12 quote">
           Quote appears here
         </div>
       </div>
-      <div class="row text-center">
-        <div class="col-xs-12">
-          <button id="localQuote" class="btn">Local Quote</button>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-xs-12">
-          <button id="randomQuote" class="btn">Random Quote</button>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-xs-12">
-          <button id="simpsonsQuote" class="btn">Simpsons Quote</button>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-xs-12">
+
+      <div class="row no-gutters" style="padding-top:24px;">
+        <div class="col-sm">
           <a id="tweet" target="_blank" href="https://twitter.com/intent/tweet">
-            <button id="tweetButton" class="btn">tweet</button>
+            <button type="button" id="tweetButton" class="btn btn-primary">tweet</button>
           </a>
+        </div>      
+      
+        <div class="col-sm">
+          <button type="button" id="localQuote" class="btn btn-dark">Local Quote</button>          
         </div>
+
+        <div class="col-sm">
+          <button type="button" id="randomQuote" class="btn btn-dark">Random Quote</button>
+        </div>
+
+        <div class="col-sm">
+          <button type="button" id="simpsonsQuote" class="btn btn-dark">Simpsons Quote</button>
+        </div>
+
       </div>
+      
     </div>
 
 
